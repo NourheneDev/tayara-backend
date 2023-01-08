@@ -5,7 +5,8 @@ const schema = mongoose.Schema({
     password : String,
     nom : String,
     prenom : String,
-    image : String 
+    image : String ,
+    adresse : String
 })
 
 module.exports = mongoose.model('Utilisateur' , schema)
