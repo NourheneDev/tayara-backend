@@ -6,7 +6,8 @@ const schema = mongoose.Schema({
     nom : String,
     prenom : String,
     image : String ,
-    adresse : String
+    adresse : String,
+    description : String,
 })
 
 module.exports = mongoose.model('Utilisateur' , schema)
