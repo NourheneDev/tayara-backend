@@ -2,11 +2,12 @@
 const express = require('express')
 const mongoose = require('mongoose')
 
+
 // 2 - intialisation
 const serveur = express()
 //pour accepter le body json du requete http
 serveur.use(express.json())
-
+serveur.use(express.static('./'))
 //connection au serveur de la base de données
 mongoose.set('strictQuery', false);
 mongoose.connect('mongodb://127.0.0.1:27017/tayara' , (err , success)=>{

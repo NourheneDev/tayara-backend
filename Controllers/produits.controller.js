@@ -14,7 +14,23 @@ exports.details = async (req, res) => {
 };
 
 exports.ajouter = async (req, res) => {
+  console.log(req.files);
   const resultat = new Produit(req.body);
+  /* en cas de galery ( multiple ) */
+  /*  var tab = []
+  if(req.files && req.files.null){
+    req.files.null.map((f)=>{
+    
+      tab.push(f.path)
+    })
+  }
+  
+  console.log(tab) */
+  /* en cas d'un seul fichier */
+  if (req.files && req.files.pic) {
+    resultat.image = req.files.pic;
+    resultat.image.type_image = req.files.pic.type;
+  }
   resultat
     .save()
     .then((success) => {
@@ -37,5 +53,20 @@ exports.modifier = async (req, res) => {
 
 exports.supprimer = async (req, res) => {
   const resultat = await Produit.deleteOne({ _id: req.params._id });
+  res.send(resultat);
+};
+
+exports.filterByCategory = async (req, res) => {
+  const resultat = await Produit.find({categorie_id: req.params.categorie_id});
+  res.send(resultat);
+};
+
+/* soit le body contient un objet
+{
+  couleur : 'noir', taille :'XL' , type : 'test' .....
+}
+*/
+exports.filterAll = async (req, res) => {
+  const resultat = await Produit.find(req.body);
   res.send(resultat);
 };
